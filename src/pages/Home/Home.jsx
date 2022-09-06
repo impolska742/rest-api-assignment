@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Form, Modal, Spinner, Table } from "react-bootstrap";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import TableRow from "../../components/Table/TableRow";
 import { POSTS_URL } from "../../constants/constants";
 import {
@@ -17,12 +18,23 @@ const Home = (props) => {
   const [show, setShow] = useState(false);
   const [body, setBody] = useState("");
   const [title, setTitle] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem("userInfo")) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    setEmail(JSON.parse(localStorage.getItem("userInfo")).email);
+    setEmail(
+      JSON.parse(localStorage.getItem("userInfo"))
+        ? JSON.parse(localStorage.getItem("userInfo")).email
+        : ""
+    );
     fetchData();
   }, []);
 
