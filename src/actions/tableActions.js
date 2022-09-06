@@ -5,14 +5,14 @@ import {
 } from "../constants/tableConstants";
 import axios from "axios";
 
-export const getTableDataAction = () => async (dispatch) => {
+export const getTableDataAction = (userId) => async (dispatch) => {
   try {
     dispatch({
       type: GET_TABLE_DATA_LOADING,
     });
 
     const { data } = await axios.get(
-      `https://jsonplaceholder.typicode.com/posts`
+      `https://jsonplaceholder.typicode.com/users/${userId}/posts`
     );
 
     dispatch({

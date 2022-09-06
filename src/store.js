@@ -3,20 +3,20 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 //reducers
-// import { userLoginReducer } from "./reducers/userReducer";
+import { userLoginReducer } from "./reducers/userReducer";
 import { getTableDataReducer } from "./reducers/tableReducer";
 
 const reducer = combineReducers({
-  // userLogin: userLoginReducer,
+  userLogin: userLoginReducer,
   getTableData: getTableDataReducer,
 });
 
-// const userInfoFromStorage = localStorage.getItem("userInfo")
-//   ? JSON.parse(localStorage.getItem("userInfo"))
-//   : null;
+const userInfoFromStorage = localStorage.getItem("userInfo")
+  ? JSON.parse(localStorage.getItem("userInfo"))
+  : null;
 
 const initialState = {
-  // userLogin: { userInfo: userInfoFromStorage },
+  userLogin: { userInfo: userInfoFromStorage },
 };
 
 const middleware = [thunk];
