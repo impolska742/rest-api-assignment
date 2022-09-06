@@ -8,14 +8,11 @@ import TableRow from "./TableRow";
 const TableComponent = () => {
   const dispatch = useDispatch();
   const getTableData = useSelector((state) => state.getTableData);
-  const userLogin = useSelector((state) => state.userLogin);
-
-  const { userInfo } = userLogin;
 
   const { loading, error, tableData } = getTableData;
 
   useEffect(() => {
-    dispatch(getTableDataAction(userInfo));
+    dispatch(getTableDataAction(localStorage.getItem("userInfo")));
   }, []);
 
   return loading ? (

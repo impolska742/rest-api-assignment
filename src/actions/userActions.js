@@ -28,7 +28,6 @@ export const userLoginAction =
     } else {
       localStorage.setItem("userInfo", userId);
       navigate("/");
-
       dispatch({
         type: USER_LOGIN_SUCCESS,
       });

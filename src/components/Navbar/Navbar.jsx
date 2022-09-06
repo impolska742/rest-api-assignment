@@ -13,14 +13,15 @@ const NavbarComponent = () => {
     dispatch(userLogoutAction(navigate));
   };
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar style={{ marginBottom: "40px" }} bg="dark" variant="dark">
       <Container>
         <Navbar.Brand href="/">RESTIFY</Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link onClick={logout} href="/">
-            Logout
-          </Nav.Link>
+          <Nav.Link href="/add">Add Post</Nav.Link>
+        </Nav>
+        <Nav>
+          <Nav.Link onClick={logout}>Logout</Nav.Link>
         </Nav>
       </Container>
     </Navbar>

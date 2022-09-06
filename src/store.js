@@ -4,11 +4,12 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 //reducers
 import { userLoginReducer } from "./reducers/userReducer";
-import { getTableDataReducer } from "./reducers/tableReducer";
+import { addPostReducer, getTableDataReducer } from "./reducers/tableReducer";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   getTableData: getTableDataReducer,
+  addPost: addPostReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
