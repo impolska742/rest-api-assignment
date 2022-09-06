@@ -8,7 +8,6 @@ import TableRow from "./TableRow";
 const TableComponent = () => {
   const dispatch = useDispatch();
   const getTableData = useSelector((state) => state.getTableData);
-  console.log({ getTableData });
 
   const { loading, error, tableData } = getTableData;
 
@@ -17,32 +16,50 @@ const TableComponent = () => {
   }, []);
 
   return loading ? (
-    <Spinner />
+    <div
+      style={{
+        minWidth: "400px",
+        minHeight: "500px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Spinner
+        style={{
+          transform: "scale(4.5)",
+        }}
+        animation="grow"
+        variant="dark"
+      />
+    </div>
   ) : !error ? (
-    <Table style={{ marginTop: "40px" }} striped bordered hover>
-      <thead>
-        <tr>
-          <th style={{ minWidth: "80px" }}>User ID</th>
-          <th>ID</th>
-          <th>Title</th>
-          <th style={{ minWidth: "200px" }}>Body</th>
-        </tr>
-      </thead>
-      <tbody>
-        {tableData &&
-          tableData.map((row) => {
-            return (
-              <TableRow
-                key={row.id}
-                id={row?.id}
-                userId={row?.userId}
-                title={row?.title}
-                body={row?.body}
-              />
-            );
-          })}
-      </tbody>
-    </Table>
+    <>
+      <Table style={{ marginTop: "40px" }} striped bordered hover>
+        <thead>
+          <tr>
+            <th style={{ minWidth: "80px" }}>User ID</th>
+            <th>ID</th>
+            <th>Title</th>
+            <th style={{ minWidth: "200px" }}>Body</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tableData &&
+            tableData.map((row) => {
+              return (
+                <TableRow
+                  key={row.id}
+                  id={row?.id}
+                  userId={row?.userId}
+                  title={row?.title}
+                  body={row?.body}
+                />
+              );
+            })}
+        </tbody>
+      </Table>
+    </>
   ) : (
     <Alert variant="danger">{error}</Alert>
   );
