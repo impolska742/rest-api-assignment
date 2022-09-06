@@ -24,7 +24,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/" element={<Home />} />
+          {isAllowed && <Route path="/" element={<Home />} />}
         </Routes>
       </Container>
     </>
