@@ -1,30 +1,21 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+import { userLoginAction } from "../../actions/userActions";
 
 const Login = () => {
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const login = (e) => {
     e.preventDefault();
-    if (password !== "User@123") {
-      toast.error("Incorrect UserId or Password !", {
-        position: "bottom-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    } else {
-      localStorage.setItem("userInfo", {
-        userId,
-      });
-    }
+    dispatch(userLoginAction(password, userId, navigate));
   };
+
   return (
     <Form onSubmit={login}>
       <Form.Group style={{ marginTop: "40px" }} className="mb-3">
