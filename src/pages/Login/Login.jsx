@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 import { saveUserDataInMemory } from "../../utils/session-storage";
 
 const Login = () => {
@@ -16,8 +17,19 @@ const Login = () => {
       password: password,
       isAuthenticated: true,
     };
-    saveUserDataInMemory(data);
-    navigate("/");
+    const allowedUser = JSON.parse(localStorage.getItem("allowedUser"));
+    console.log(allowedUser, data);
+
+    if (
+      allowedUser &&
+      allowedUser.email === email &&
+      allowedUser.password === password
+    ) {
+      saveUserDataInMemory(data);
+      navigate("/");
+    } else {
+      toast.error("Invalid Email or password!!");
+    }
   };
 
   return (

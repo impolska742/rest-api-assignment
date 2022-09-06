@@ -2,10 +2,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router";
-import {
-  saveUserDataInAllowedUsersList,
-  saveUserDataInMemory,
-} from "../../utils/session-storage";
+import { saveUserDataInMemoryForRegister } from "../../utils/session-storage";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -19,8 +16,7 @@ const SignUp = () => {
       password: password,
       isAuthenticated: true,
     };
-    saveUserDataInMemory(data);
-    saveUserDataInAllowedUsersList(data);
+    saveUserDataInMemoryForRegister(data);
     navigate("/");
   };
 
