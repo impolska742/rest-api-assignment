@@ -2,14 +2,17 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router";
-import { saveUserDataInMemory } from "../../utils/session-storage";
+import {
+  saveUserDataInAllowedUsersList,
+  saveUserDataInMemory,
+} from "../../utils/session-storage";
 
-const Login = () => {
+const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const login = (e) => {
+  const register = (e) => {
     e.preventDefault();
     const data = {
       email: email,
@@ -17,13 +20,14 @@ const Login = () => {
       isAuthenticated: true,
     };
     saveUserDataInMemory(data);
+    saveUserDataInAllowedUsersList(data);
     navigate("/");
   };
 
   return (
     <>
-      <h1 style={{ marginTop: "40px" }}>Login</h1>
-      <Form onSubmit={login}>
+      <h1 style={{ marginTop: "40px" }}>Register</h1>
+      <Form onSubmit={register}>
         <Form.Group style={{ marginTop: "40px" }} className="mb-3">
           <Form.Label>Email</Form.Label>
           <Form.Control
@@ -47,22 +51,28 @@ const Login = () => {
           />
         </Form.Group>
 
-        <Button style={{ marginRight: "20px" }} variant="dark" type="submit">
-          Login
+        <Button
+          style={{
+            marginRight: "20px",
+          }}
+          variant="dark"
+          type="submit"
+        >
+          Register
         </Button>
 
         <Button
           onClick={() => {
-            navigate("/sign-up");
+            navigate("/login");
           }}
           variant="secondary"
           type="submit"
         >
-          New User? Register
+          Already a user? Login
         </Button>
       </Form>
     </>
   );
 };
 
-export default Login;
+export default SignUp;

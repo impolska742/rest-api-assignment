@@ -3,10 +3,9 @@ import { Container } from "react-bootstrap";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
-import AddPost from "./pages/AddPost/AddPost";
-import EditPost from "./pages/EditPost/EditPost";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
+import SignUp from "./pages/SignUp/SignUp";
 
 function App() {
   const navigate = useNavigate();
@@ -14,7 +13,6 @@ function App() {
   useEffect(() => {
     if (!localStorage.getItem("userInfo")) {
       setIsAllowed(false);
-      navigate("/login");
     } else {
       setIsAllowed(true);
     }
@@ -25,9 +23,8 @@ function App() {
       <Container>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/sign-up" element={<SignUp />} />
           <Route path="/" element={<Home />} />
-          <Route path="/add" element={<AddPost />} />
-          <Route path="/edit" element={<EditPost />} />
         </Routes>
       </Container>
     </>
